@@ -25,6 +25,11 @@ print("")
 print("")
 
 url = input("Splash Page URL: ")
+prox = input("Proxies? (Y/N): ")
+username = input("Adidas Email: ")
+password = input("Adidas Pass: ")
+size = input("Shoe Size: ")
+
 
 dcap = dict(DesiredCapabilities.PHANTOMJS)
 dcap["phantomjs.page.settings.userAgent"] = ( "Mozilla-5.0 (Windows NT 6.3; WOW64) AppleWebKit-537.36 (KHTML, like Gecko) Chrome-34.0.1847.137 Safari-537.36"
@@ -33,6 +38,13 @@ dcap["phantomjs.page.settings.userAgent"] = ( "Mozilla-5.0 (Windows NT 6.3; WOW6
 driver = webdriver.PhantomJS(desired_capabilities=dcap)
 driver.set_window_size(1024, 768)
 
+driver.get("https://www.adidas.com/us/myaccount-create-or-login")
+userform = driver.find_element_by_xpath('//*[@id="signinForm"]/fieldset/div[2]/div')
+userform.send_keys(str(username))
+passform = driver.find_element_by_xpath('//*[@id="signinForm"]/fieldset/div[3]/div')
+passform.send_keys(str(password))
+
+driver.find_element_by_xpath('//*[@id="signinForm"]/fieldset/div[5]').click()
 
 
 
